@@ -23,3 +23,5 @@ Route::get('/test', function () {
         'ciudad' => 'tuxtla'
     ];
 });
+
+Route::resource('/expense_reports', 'ExpenseReportController');
