@@ -18,7 +18,7 @@ Route::get('/', function () {
 });
 
 Route::get('/test', function () {
-    return [ 
+    return [
         'nombre' => 'ricardo',
         'ciudad' => 'tuxtla'
     ];
