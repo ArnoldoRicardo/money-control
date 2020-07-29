@@ -1,0 +1,8 @@
+.inline {
+  display: flex;
+}
+
+.inline * {
+  margin-left: 5px;
+}
+

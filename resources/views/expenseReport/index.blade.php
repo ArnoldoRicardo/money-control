@@ -1,22 +1,47 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+@extends('layouts.base')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Expense Reports</title>
-</head>
+@section('content')
+<div class="row">
+    <div class="col">
+        <h1>Reports</h1>
 
-<body>
-    <h1>Reports</h1>
-    <ul>
-        @foreach($expenserReports as $expenserReport)
-        <li>
-            {{$expenserReport->title}}
-        </li>
-        @endforeach
-    </ul>
+    </div>
+</div>
 
-</body>
+<div class="row my-3">
+    <div class="col">
+        <a class="btn btn-success" href="{{ route('expense_reports.create') }}">create new report</a>
+    </div>
+</div>
 
-</html>
+<div class="row">
+    <div class="col">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($expenserReports as $expenserReport)
+                <tr>
+                    <th scope="row">{{$loop->iteration}}</th>
+                    <td>{{$expenserReport->title}}</td>
+                    <td class="inline">
+                        <a class="btn btn-primary" href="{{ route('expense_reports.edit',$expenserReport->id) }}">Edit</a>
+                        <form action="{{ route('expense_reports.destroy',$expenserReport->id) }}" method="post">
+                            @csrf
+                            @method('delete')
+                            <button class="btn btn-danger">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@endsection

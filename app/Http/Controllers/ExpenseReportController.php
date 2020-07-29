@@ -26,7 +26,7 @@ class ExpenseReportController extends Controller
      */
     public function create()
     {
-        //
+        return view('expenseReport.create');
     }
 
     /**
@@ -37,7 +37,15 @@ class ExpenseReportController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validData = $request->validate([
+            'title' => 'required|min:3'
+        ]);
+
+        $report = new ExpenseReport();
+        $report->title = $validData['title'];
+        $report->save();
+
+        return redirect()->route('expense_reports.index');
     }
 
     /**
@@ -59,7 +67,12 @@ class ExpenseReportController extends Controller
      */
     public function edit($id)
     {
-        //
+
+        $report = ExpenseReport::findOrFail($id);
+
+        return view('expenseReport.edit', [
+            'report' => $report
+        ]);
     }
 
     /**
@@ -71,7 +84,15 @@ class ExpenseReportController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validData = $request->validate([
+            'title' => 'required|min:3'
+        ]);
+
+        $report = ExpenseReport::findOrFail($id);
+        $report->title = $validData['title'];
+        $report->save();
+
+        return redirect()->route('expense_reports.index');
     }
 
     /**
@@ -82,6 +103,9 @@ class ExpenseReportController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $report = ExpenseReport::findOrFail($id);
+        $report->delete();
+
+        return redirect()->route('expense_reports.index');
     }
 }
