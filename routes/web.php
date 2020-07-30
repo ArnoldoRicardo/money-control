@@ -25,3 +25,5 @@ Route::get('/test', function () {
 });
 
 Route::resource('/expense_reports', 'ExpenseReportController');
+Route::get('/expense_report/{expense_report}/expenses/create', 'ExpenseController@create')->name('expense.create');
+Route::post('/expense_report/{expense_report}/expenses', 'ExpenseController@store')->name('expense.store');

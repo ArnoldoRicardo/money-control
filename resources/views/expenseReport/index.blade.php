@@ -28,7 +28,11 @@
                 @foreach($expenserReports as $expenserReport)
                 <tr>
                     <th scope="row">{{$loop->iteration}}</th>
-                    <td>{{$expenserReport->title}}</td>
+                    <td>
+                        <a href="{{ route('expense_reports.show',$expenserReport->id) }}">
+                            {{$expenserReport->title}}
+                        </a>
+                    </td>
                     <td class="inline">
                         <a class="btn btn-primary" href="{{ route('expense_reports.edit',$expenserReport->id) }}">Edit</a>
                         <form action="{{ route('expense_reports.destroy',$expenserReport->id) }}" method="post">
